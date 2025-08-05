@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: notification-module
+  mail:
+    host: smtp.yandex.com
+    port: 587
+    username: aidar-mautaliev@yandex.ru
+    password: vmcluoenapzhbvuy
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true    # Required for Yandex
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+        debug: true
