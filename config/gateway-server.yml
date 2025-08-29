@@ -1,8 +1,6 @@
 server:
   port: 8081
 spring:
-  #main:
-    #web-application-type: reactive
   application:
     name: gateway-server
   cloud:
@@ -13,5 +11,9 @@ spring:
         - id: user-module
           uri: http://localhost:8080
           predicates:
-            #- Path: /api/users/**
             - Path=/api/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true

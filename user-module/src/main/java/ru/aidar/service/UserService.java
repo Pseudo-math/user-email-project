@@ -1,5 +1,6 @@
 package ru.aidar.service;
 
+import org.springframework.kafka.core.KafkaTemplate;
 import ru.aidar.dto.UserRequestDto;
 import ru.aidar.dto.UserResponseDto;
 import ru.aidar.exception.ResourceNotFoundException;
@@ -15,9 +16,11 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, KafkaTemplate<String, String> kafkaTemplate) {
         this.userRepository = userRepository;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     // Приватный метод-маппер из Entity в безопасный DTO
@@ -59,6 +62,8 @@ public class UserService {
         user.setPassword(userRequestDto.getPassword());
 
         User savedUser = userRepository.save(user);
+        publishUserCreated(user.getEmail());
+
         return toUserResponseDto(savedUser);
     }
 
@@ -81,6 +86,20 @@ public class UserService {
         if (!userRepository.existsById(id)) {
             throw new ResourceNotFoundException("User not found with id: " + id);
         }
+        User user = userRepository.findById(id).get();
         userRepository.deleteById(id);
+        publishUserDeleted(user.getEmail());
+    }
+
+    public void publishUserCreated(String email) {
+        System.out.println("Письмо о создании направлено на email: " + email);
+        String message = "Поздравляю, вы были зарегистрированы на нашем сервисе";
+        kafkaTemplate.send("user_topic", message);
+    }
+
+    public void publishUserDeleted(String email) {
+        System.out.println("Письмо о удалении направлено на email: " + email);
+        String message = "Не поздравляем, вы были удалены на нашем сервисе";
+        kafkaTemplate.send("user_topic", message);
     }
 }

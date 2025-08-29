@@ -1,10 +1,8 @@
 spring:
-  kafka:
-    bootstrap: localhost:9092
   datasource:
-    url: jdbc:postgresql://localhost:5432/user_module_db
-    username: postgres
-    password: aaadmin
+    url: jdbc:postgresql://localhost:5434/security_db
+    username: admin
+    password: password
   jpa:
     properties:
       hibernate: org.hibernate.dialect.PostgreSQLDialect

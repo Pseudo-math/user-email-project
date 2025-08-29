@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/eureka-server" />
             <option value="$PROJECT_DIR$/gateway-server" />
             <option value="$PROJECT_DIR$/notification-module" />
+            <option value="$PROJECT_DIR$/security-module" />
             <option value="$PROJECT_DIR$/user-module" />
           </set>
         </option>
