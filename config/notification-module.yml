@@ -5,7 +5,7 @@ spring:
     host: smtp.mail.ru
     port: 465
     username: notification-module@mail.ru
-    password: ZUduLwpsQDEquuAG0UvH
+    password:
     properties:
       mail:
         smtp:
