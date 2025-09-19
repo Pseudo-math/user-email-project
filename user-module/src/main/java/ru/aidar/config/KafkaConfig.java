@@ -17,7 +17,6 @@ import java.util.Map;
 @EnableKafka
 @Configuration
 public class KafkaConfig {
-    //TODO: добавить в application properties
     @Value("${spring.kafka.bootstrap}")
     private String bootStrapService;
 
