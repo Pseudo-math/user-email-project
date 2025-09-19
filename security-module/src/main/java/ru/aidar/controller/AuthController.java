@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.aidar.entity.UserCredentional;
 import ru.aidar.service.AuthService;
-
+//TODO: globalExeceptionHandler
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -23,6 +23,16 @@ public class AuthController {
     @GetMapping("/token")
     public String generateToken(@RequestBody UserCredentional userCredentional) {
         return authService.generateToken(userCredentional.getName());
+    }
+
+    @GetMapping("/refresh-token")
+    public String generateRefreshToken(@RequestBody UserCredentional userCredentional) {
+        return "";
+    }
+
+    @PostMapping("/refresh")
+    public String generateTokenByRefreshToken(@RequestBody UserCredentional userCredentional) {
+        return "";
     }
 
     @GetMapping("/validate")

@@ -22,6 +22,7 @@ public class JwtUtil {
     }
 
     public String createToken(Map<String, Object> claims, String username) {
+        //claims.put("roles", "Admin");
         return Jwts.builder().claims(claims).subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
