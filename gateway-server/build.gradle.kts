@@ -23,6 +23,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")  // Правильная зависимость Gateway
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")  // Если используете Eureka
+    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")  // Для тестирования реактивного кода
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

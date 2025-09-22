@@ -1,5 +1,6 @@
 package ru.aidar.filter;
 
+import org.apache.http.HttpHeaders;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 
@@ -15,7 +16,11 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
     public GatewayFilter apply(Config config) {
       //  return null;
         return ((((exchange, chain) -> {
-            if (routeFilter.IsSecured.test(exchange.getRequest())) return true;
+            if (routeFilter.IsSecured.test(exchange.getRequest())) {
+                if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                    throw new RuntimeException("Missing auth header");
+                }
+            }
         })));
     }
 

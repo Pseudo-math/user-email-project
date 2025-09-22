@@ -8,8 +8,8 @@ spring:
   mail:
     host: smtp.mail.ru
     port: 465
-    username: notification-module@mail.ru
-    password:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -19,56 +19,3 @@ spring:
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
         debug: true
-
-
-
-
-#spring:
-#  application:
-#    name: notification-module
-#  mail:
-#    host: live.smtp.mailtrap.io
-#    #host: smtp.yandex.ru
-#    port: 465
-#    username: smtp@mailtrap.io
-#    #username: aidar-mautaliev@yandex.ru
-#    password: b0b3f049296ec4da2a56793e71187d8b
-#    #password: kieoufjzlqypmzyw
-#    protocol: smtps
-#    properties:
-#      mail.smtp:
-#        auth: true
-#        ssl:
-#          enable: true
-#        # Добавленные свойства таймаутов (в миллисекундах)
-#        connectiontimeout: 10000
-#        timeout: 10000
-#        writetimeout: 10000
-
-
-
-
-
-
-
-
-
-#spring:
-#  application:
-#    name: notification-module
-#  mail:
-#    host: smtp.yandex.ru
-#    port: 587
-#    username: aidar-mautaliev@yandex.ru
-#    password: vmcluoenapzhbvuy
-#    protocol: smtp
-#    properties:
-#      mail:
-#        smtp:
-#          auth: true
-#          starttls:
-#            enable: true    # Required for Yandex
-#          connectiontimeout: 5000
-#          timeout: 5000
-#          writetimeout: 5000
-#        debug: true
