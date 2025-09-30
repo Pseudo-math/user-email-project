@@ -1,13 +1,19 @@
 package ru.aidar.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
 
 // Этот DTO безопасен для отправки клиенту
+@Schema
 public class UserResponseDto {
-
+    @Schema(description = "Unique identificator for user", example = "12")
     private Long id;
+    @Schema(description = "Username for user", example = "valera")
     private String username;
+    @Schema(description = "email for user", example = "valer@gmail.com")
     private String email;
+    @Schema(description = "Created time for user", example = "i dont now")
     private LocalDateTime createdAt;
 
     // Пустой конструктор для Jackson

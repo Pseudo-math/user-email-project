@@ -1,5 +1,7 @@
 package ru.aidar.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import ru.aidar.dto.UserRequestDto;
 import ru.aidar.dto.UserResponseDto;
 import ru.aidar.service.UserService;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Endpoints for users", description = "api for work with Users")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -21,6 +24,7 @@ public class UserController {
     }
 
     @GetMapping
+    @Operation(summary = "Найти всех пользователей", description = "Ищет всех User-ов в базе данных, не защищен")
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }

@@ -1,26 +1,32 @@
 package ru.aidar.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
+@Schema(description = "Entity for User")
 @Entity
 @Table(name = "users")
 public class User {
-
+    @Schema(description = "Unique identificator for user")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Schema(description = "Username for user")
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Schema(description = "email for user")
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Schema(description = "password for user")
     @Column(nullable = false)
     private String password;
 
+    @Schema(description = "время создания for user")
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
