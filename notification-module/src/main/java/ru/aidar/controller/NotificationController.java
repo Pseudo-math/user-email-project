@@ -18,7 +18,7 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-    @PostMapping
+    @PostMapping("/send")
     public ResponseEntity<String> sendNotification(@RequestBody NotificationRequestDto request) {
         notificationService.sendNotification(request);
         return ResponseEntity.ok("Запрос на отправку " + request.getMessageType() + " письма принят для: " + request.getEmail());

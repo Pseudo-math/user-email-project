@@ -1,6 +1,8 @@
 package ru.aidar.service;
 
+import org.bouncycastle.crypto.agreement.jpake.JPAKEUtil;
 import org.springframework.kafka.core.KafkaTemplate;
+import ru.aidar.dto.JwtAuthentificationResponseDto;
 import ru.aidar.dto.UserRequestDto;
 import ru.aidar.dto.UserResponseDto;
 import ru.aidar.exception.ResourceNotFoundException;
@@ -17,10 +19,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private KafkaTemplate<String, String> kafkaTemplate;
+    private JwtTokenProvider tokenProvider;
 
-    public UserService(UserRepository userRepository, KafkaTemplate<String, String> kafkaTemplate) {
+    public UserService(UserRepository userRepository, KafkaTemplate<String, String> kafkaTemplate, JwtTokenProvider tokenProvider) {
         this.userRepository = userRepository;
         this.kafkaTemplate = kafkaTemplate;
+        this.tokenProvider = tokenProvider;
     }
 
     // Приватный метод-маппер из Entity в безопасный DTO
@@ -65,6 +69,14 @@ public class UserService {
         publishUserCreated(user.getEmail());
 
         return toUserResponseDto(savedUser);
+    }
+
+    @Transactional
+    public JwtAuthentificationResponseDto registerUser(UserRequestDto userRequestDto) {
+        UserResponseDto userResponseDto = createUser(userRequestDto);
+        String jwt = tokenProvider.generateToken(userResponseDto.getEmail(), userResponseDto.getId());
+        System.out.println("Все хорощо");
+        return new JwtAuthentificationResponseDto(jwt);
     }
 
     @Transactional
